@@ -189,6 +189,13 @@ minor versions can still change behaviour.
 
 ### Fixed
 
+- **Claude calls work again with Claude Code 2.1.331.** That version prints
+  `--output-format json` as a list of events (init, assistant, rate limit,
+  result) instead of the single result object, and the list was passed on as
+  the model's text. Every JSON call got a list back: `sellbird train` stopped at
+  "Could not extract product information", usage went unrecorded, and a result
+  marked `is_error` was no longer retried. Sellbird now reads the result event
+  from the list.
 - **Instantly's daily cap counts your local day, not UTC** (from #177 by
   @solvejet-team), so the cap resets at your midnight.
 
